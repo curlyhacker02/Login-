@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+import axios from 'axios';
+
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [products, setProducts] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
+
+  // Function to handle user login
+  const handleLogin = () => {
+    axios.post('https://app.signalgas.io/api/v1/customer/signin', {
+      email: email,
+      password: password
+    })
+    .then(response => {
+      // Handle successful login
+      console.log('Login successful');
+      // Store the received token for future requests
+      const token = response.data.token;
+      // Make request to retrieve products using the token
+      axios.get('https://app.signalgas.io/api/v1/products', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(productsResponse => {
+        setProducts(productsResponse.data);
+      })
+      .catch(error => {
+        console.error('Error retrieving products:', error);
+      });
+      // Make request to retrieve currencies using the token
+      axios.get('https://app.signalgas.io/api/v1/countries/', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(currenciesResponse => {
+        setCurrencies(currenciesResponse.data);
+      })
+      .catch(error => {
+        console.error('Error retrieving currencies:', error);
+      });
+    })
+    .catch(error => {
+      console.error('Login error:', error);
+    });
+  };
+
+  // Function to handle user signup
+  const handleSignup = () => {
+    axios.post('https://app.signalgas.io/api/v1/customer/signup', {
+      fname: 'Tom',
+      lname: 'Bhonzo',
+      country_id: 1,
+      phone: '0777777777777',
+      email: 'tom@gmail.com',
+      password: '123'
+    })
+    .then(response => {
+      // Handle successful signup
+      console.log('Signup successful');
+    })
+    .catch(error => {
+      console.error('Signup error:', error);
+    });
+  };
+
+  return (
+    <View>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      <Button
+        title="Login"
+        onPress={handleLogin}
+      />
+      <Button
+        title="Signup"
+        onPress={handleSignup}
+      />
+      <Text>Products: {JSON.stringify(products)}</Text>
+      <Text>Currencies: {JSON.stringify(currencies)}</Text>
+    </View>
+  );
+};
+
+export default App;
