@@ -1,0 +1,22 @@
+***Tools for React Native Development***
+1. *React Native*: The core framework for building mobile applications using JavaScript and React.
+2. *Expo*: A set of tools and services for building React Native applications, providing a fast development environment and easy deployment.
+3. *Visual Studio Code*: A popular code editor with support for React Native development, offering features like IntelliSense, debugging, and extensions for React Native.
+4. *Node.js*: Required for running the JavaScript environment and package management using npm or yarn.
+5. *React Navigation*: A library for implementing navigation and routing in React Native applications.
+6. *Axios*: A popular HTTP client for making API requests in React Native applications.
+
+***Consuming the Supplied Endpoints***
+To consume the supplied endpoints using React Native, use the Axios library to make HTTP requests to the API endpoints. Here's a high-level overview of how you can consume the endpoints:
+
+1. *Logging In and Signing Up*: Use the Axios library to make POST requests to the login and signup endpoints, providing the necessary user credentials and data.
+
+2. *Retrieving Products and Currencies*: Similarly, use Axios to make GET requests to the products and currencies endpoints, providing the required authorization token in the request headers.
+
+3. *React Native Components*: Utilize React Native components such as `View`, `Text`, `TextInput`, and `Button` to create the user interface for the login, signup, and data retrieval screens.
+
+4. *State Management*: Use React Native's state management capabilities, such as the `useState` hook, to manage the application's state and handle user input.
+
+5. *Navigation*: Implement navigation between different screens using React Navigation to create a seamless user experience.
+
+By leveraging these tools and libraries, you can effectively consume the supplied endpoints using React Native, providing a robust and efficient mobile application for interacting with the SignalGas API.
